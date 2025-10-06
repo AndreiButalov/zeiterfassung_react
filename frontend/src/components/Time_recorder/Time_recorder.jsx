@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import './Time_recorder.css'
+import React, { useEffect, useState } from 'react';
+// import { db } from "../../firebase";
+// import { ref, set } from "firebase/database";
+import './Time_recorder.css';
+
 
 const Time_recorder = () => {
 
