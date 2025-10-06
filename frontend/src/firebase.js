@@ -1,19 +1,24 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-//   apiKey: "DEIN_API_KEY",
-//   authDomain: "DEIN_PROJEKT.firebaseapp.com",
-  databaseURL: "https://zeiterfassung-71109-default-rtdb.europe-west1.firebasedatabase.app/", // 👈 ganz wichtig!
-//   projectId: "DEIN_PROJEKT_ID",
-//   storageBucket: "DEIN_PROJEKT.appspot.com",
-//   messagingSenderId: "DEINE_SENDER_ID",
-//   appId: "DEINE_APP_ID"
+  apiKey: "AIzaSyCCxCnPmlj9fRORbbsTdyNzyQuqFrd5BVQ",
+  authDomain: "zeiterfassung-c8154.firebaseapp.com",
+  projectId: "zeiterfassung-c8154",
+  databaseURL: "https://zeiterfassung-c8154-default-rtdb.europe-west1.firebasedatabase.app/", 
+  storageBucket: "zeiterfassung-c8154.firebasestorage.app",
+  messagingSenderId: "571567285839",
+  appId: "1:571567285839:web:584b705788d2396a466c3a",
+  measurementId: "G-K5V61P16GG"
 };
 
-// Firebase initialisieren
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const Analytics = getAnalytics(app);
 
 
-// Realtime Database referenzieren
-export const db = getDatabase(app);
