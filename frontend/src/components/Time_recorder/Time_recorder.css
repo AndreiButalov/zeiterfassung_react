@@ -1,0 +1,20 @@
+.time_recorder_button_group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.time_recorder_current_time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.current_time {
+    border: 2px solid #6C757D;
+    padding: 6px 10px;
+    border-radius: 6px;
+}

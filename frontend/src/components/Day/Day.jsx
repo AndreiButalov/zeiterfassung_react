@@ -1,4 +1,5 @@
 import React from 'react'
+import Time_recorder from '../Time_recorder/Time_recorder';
 
 
 const Day = ({ date, show, onClose }) => {
@@ -26,7 +27,7 @@ const Day = ({ date, show, onClose }) => {
                   <button type="button" className="btn-close" onClick={onClose}></button>
                 </div>
                 <div className="modal-body">
-                  <p>Hier kannst du Inhalte für {date.toDateString()} anzeigen.</p>
+                  <Time_recorder/>
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" onClick={onClose}>
