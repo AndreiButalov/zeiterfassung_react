@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from './components/Navbar/navbar'
 import Calender from './components/Calender/calender'
+import Navbar from './components/Navbar/Navbar'
 
 
 
