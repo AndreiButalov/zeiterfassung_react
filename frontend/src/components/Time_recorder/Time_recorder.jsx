@@ -8,10 +8,14 @@ const Time_recorder = () => {
 
     const [currentTime, setCurrentTime] = useState('');
     const [startTime, setStartTime] = useState('-');
-    // const [pauseTime, setPauseTime] = useState('-');
+    const [pauseTime, setPauseTime] = useState('-');
     // const [endTime, setEndTime] = useState('-');
     const [isStartDisabled, setIsStartDisabled] = useState(false);
+    const [showTable, setShowTable] = useState(false);
+    const [showStopButton, setStopButton] = useState(false);
+    const [hidePauseButton, setPauseButton] = useState(true);
     // const [userName] = useState('andrei');
+
 
     useEffect(() => {
         const updateTime = () => {
@@ -27,13 +31,36 @@ const Time_recorder = () => {
     }, []);
 
 
-
     const getCurrentStart = () => {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('de-DE', { hour12: false });
+        const timeString = now.toLocaleTimeString('de-DE', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
         setStartTime(timeString);
-        setIsStartDisabled(true); // Deaktiviert Start nach Klick
+        setIsStartDisabled(true);
+        setShowTable(true);
     };
+
+
+    const startPauseTime = () => {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('de-DE', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        setPauseTime(timeString);
+        setStopButton(true)
+        setPauseButton(false)        
+    }
+
+
+    const getPauseTime = () => {
+        setStopButton(false)
+        setPauseButton(true)
+    }
 
 
     return (
@@ -46,26 +73,45 @@ const Time_recorder = () => {
                 </div>
                 <div className='time_recorder_button_group'>
                     <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-secondary" disabled={isStartDisabled} onClick={getCurrentStart}>Start</button>
-                        <button type="button" className="btn btn-secondary">Pause</button>
-                        <button type="button" className="btn btn-secondary">Stop</button>
+                        <button type="button" className="btn btn-secondary" 
+                            disabled={isStartDisabled} 
+                            onClick={getCurrentStart}
+                            >Start
+                        </button>
+                        {hidePauseButton && 
+                            <button type="button" className="btn btn-secondary" 
+                                disabled={!isStartDisabled} 
+                                onClick={startPauseTime}
+                                >Pause
+                            </button>
+                        }
+                        {showStopButton &&
+                            <button type="button" className="btn btn-secondary" 
+                                disabled={!isStartDisabled} 
+                                onClick={getPauseTime}
+                                >Stop
+                            </button>
+                        }
+                        <button type="button" className="btn btn-secondary" disabled={!isStartDisabled}>Ende</button>
                     </div>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Start</th>
-                                <th scope="col">Pause</th>
-                                <th scope="col">Ende</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{startTime}</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {showTable && (
+                        <table className="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">Pause</th>
+                                    <th scope="col">Ende</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{startTime}</td>
+                                    <td>{pauseTime}</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    )}
                 </div>
             </div>
         </div>
