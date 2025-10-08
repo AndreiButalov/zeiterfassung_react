@@ -16,13 +16,13 @@ const Time_recorder = () => {
     const [hidePauseButton, setPauseButton] = useState(true);
     // const [userName] = useState('andrei');
 
+    const getCurrentTime = (options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }) => {
+        return new Date().toLocaleTimeString('de-DE', options);
+    };
+
 
     useEffect(() => {
-        const updateTime = () => {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('de-DE', { hour12: false });
-            setCurrentTime(timeString);
-        };
+        const updateTime = () => setCurrentTime(getCurrentTime());
 
         updateTime();
         const interval = setInterval(updateTime, 1000);
@@ -32,29 +32,17 @@ const Time_recorder = () => {
 
 
     const getCurrentStart = () => {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('de-DE', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-        });
-        setStartTime(timeString);
+        setStartTime(getCurrentTime({ hour: '2-digit', minute: '2-digit', hour12: false }));
         setIsStartDisabled(true);
         setShowTable(true);
     };
 
 
     const startPauseTime = () => {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('de-DE', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-        });
-        setPauseTime(timeString);
-        setStopButton(true)
-        setPauseButton(false)        
-    }
+        setPauseTime(getCurrentTime({ hour: '2-digit', minute: '2-digit', hour12: false }));
+        setStopButton(true);
+        setPauseButton(false);
+    };
 
 
     const getPauseTime = () => {
