@@ -15,14 +15,23 @@ const Time_recorder = () => {
     const [startDateTime, setStartDateTime] = useState(null); // Date für Start
     const [isPauseDisabled, setIsPauseDisabled] = useState(false);
 
+    const dummyUsers = [
+        { userId: 'u1', userName: 'Max Mustermann' },
+        { userId: 'u2', userName: 'Erika Musterfrau' }
+    ];
+
     const getCurrentTime = (options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }) => {
         return new Date().toLocaleTimeString('de-DE', options);
     };
+
+    // const [user, setUser] = useState(dummyUsers[0]);
 
     useEffect(() => {
         const updateTime = () => setCurrentTime(getCurrentTime());
         updateTime();
         const interval = setInterval(updateTime, 1000);
+        console.log(dummyUsers[0]);
+        
         return () => clearInterval(interval);
     }, []);
 
@@ -33,6 +42,8 @@ const Time_recorder = () => {
         setStartTime(now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', hour12: false }));
         setIsStartDisabled(true);
         setShowTable(true);
+        
+        
     };
 
     // PAUSE starten
