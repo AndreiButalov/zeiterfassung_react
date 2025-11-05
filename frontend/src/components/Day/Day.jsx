@@ -1,9 +1,29 @@
 import React from 'react'
 import Time_recorder from '../Time_recorder/Time_recorder';
+import { createData } from '../../firabaseService';
 
 
 const Day = ({ date, show, onClose }) => {
   if (!date) return null;
+
+  const handleSave = async () => {
+    const newEntry = {
+      date: date.toISOString(),
+      name: "Max Mustermann",
+      start: "08:00",
+      end: "16:30",
+    };
+
+    try {
+      const id = await createData("workinghours", newEntry);
+      console.log("Neuer Eintrag gespeichert mit ID:", id);
+      alert("Eintrag erfolgreich gespeichert!");
+      onClose(); 
+    } catch (error) {
+      console.error("Fehler beim Speichern:", error);
+      alert("Fehler beim Speichern!");
+    }
+  };
 
   return (
     <>
@@ -33,7 +53,7 @@ const Day = ({ date, show, onClose }) => {
                   <button type="button" className="btn btn-secondary" onClick={onClose}>
                     Close
                   </button>
-                  <button type="button" className="btn btn-primary">
+                  <button type="button" className="btn btn-primary" onClick={handleSave}>
                     Save changes
                   </button>
                 </div>
